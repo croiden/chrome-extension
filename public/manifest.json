@@ -1,0 +1,29 @@
+{
+  "short_name": "React App",
+  "name": "Projectplace Chrome Extension using React",
+  "description": "Projectplace Chrome Extension using React",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "image/logo.png",
+    "48": "image/logo.png",
+    "128": "image/logo.png"
+  },
+  "permissions": ["https://local.rnd.projectplace.com/"],
+  "web_accessible_resources": ["oauth2/oauth2.html"],
+  "content_scripts": [
+    {
+      "matches": ["https://local.rnd.projectplace.com/apidocs/*"],
+      "js": ["oauth2/oauth2_inject.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": ["oauth2/oauth2.js", "app/background.js"],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+}
